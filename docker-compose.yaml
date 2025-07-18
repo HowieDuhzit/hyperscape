@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  hyperscape:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Maps host port 3000 to container port 3000; adjust as needed
+    environment:
+      - NODE_ENV=development  # Set to 'production' for prod; keeps dev mode consistent with your setup
+    volumes:
+      - .:/app  # Optional: Mounts local code for live reloading in dev; remove for production
+    restart: unless-stopped  # Ensures the container restarts on failure
