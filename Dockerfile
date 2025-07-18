@@ -4,6 +4,9 @@ FROM node:22-bookworm-slim AS builder
 # Set working directory
 WORKDIR /app
 
+# Install curl (required for Bun installation, as it's not included in the slim image)
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Copy root package files for dependency installation
 COPY package*.json ./
 
