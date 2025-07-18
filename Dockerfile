@@ -10,8 +10,13 @@ RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists
 # Copy root package files for dependency installation
 COPY package*.json ./
 
-# Copy package.json from workspaces to ensure correct monorepo install
-COPY packages/*/package.json packages/*/
+# Create directories for workspaces and copy their package.json files individually to avoid wildcard issues in destination
+RUN mkdir -p packages/hyperfy packages/plugin-hyperfy packages/rpg-core packages/rpg-tests packages/test-framework
+COPY packages/hyperfy/package.json packages/hyperfy/
+COPY packages/plugin-hyperfy/package.json packages/plugin-hyperfy/
+COPY packages/rpg-core/package.json packages/rpg-core/
+COPY packages/rpg-tests/package.json packages/rpg-tests/
+COPY packages/test-framework/package.json packages/test-framework/
 
 # Install all dependencies using npm
 RUN npm install
