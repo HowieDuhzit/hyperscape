@@ -20,7 +20,7 @@ RUN npm install
 COPY . .
 
 # Install Bun (baseline version to avoid CPU instruction set issues like AVX2 requirements)
-RUN curl -fsSL https://bun.sh/install | BUN_INSTALL=/root/.bun bash -s -- "bun-v1.1.2-x64-baseline"
+RUN curl -fsSL https://bun.sh/install | bash
 
 # Add Bun to PATH
 ENV PATH="/root/.bun/bin:$PATH"
